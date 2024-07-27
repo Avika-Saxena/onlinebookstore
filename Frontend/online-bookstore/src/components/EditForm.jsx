@@ -17,31 +17,21 @@ function  EditForm() {
     };
 
      const [formdata, setformdata] = useState({
-        title: book?.title || '',
-        author: book?.author || '',
-        publisheddate: book?.publisheddate ? formatDate(book.publisheddate) : '',
-        image: '',
-        description: book?.description || ''
+        title:book.title || '',
+        author:book.author || '',
+        publisheddate:book.publisheddate  ||'',
+        image:book.image || '',
+        description:book.description ||''
     });
-
-    const [charCount, setCharCount] = useState(0);
-    const maxCharLimit = 400; 
 
     const handleInputChange = (e) => {
         e.preventDefault();
         const {name,value,files} = e.target;  
 
-        if (name === 'description' && value.length > maxCharLimit)
-        return;
-
         setformdata({
             ...formdata,
             [name] : name === 'image' ? files[0] : value
         });
-
-        if (name === 'description') {
-            setCharCount(value.length);
-        }
     }
 
     const onsubmiteditBook = async (bookid,e) => {
@@ -74,15 +64,15 @@ function  EditForm() {
             <form onSubmit={(e) => {onsubmiteditBook(book._id,e)}} encType ='multipart/form-data'>
                 <label>
                     <span>Title :</span>
-                    <input type="text" name="title" onChange={handleInputChange} value={book.title}/>
+                    <input type="text" name="title" value={formdata.title} onChange={handleInputChange} />
                 </label>
                 <label>
                     <span>Author :</span>
-                    <input type="text" name="author" onChange={handleInputChange} value={book.author}/>
+                    <input type="text" name="author" value={formdata.author} onChange={handleInputChange}/>
                 </label>
                 <label>
                     <span>Date :</span>
-                    <input type="text" name="publisheddate" onChange={handleInputChange} value={formatDate(book.publisheddate)}/>
+                    <input type="text" name="publisheddate" value={formatDate(formdata.publisheddate)} onChange={handleInputChange}/>
                 </label>
                 <label>
                     <span>Date :</span>

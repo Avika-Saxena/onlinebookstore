@@ -22,7 +22,7 @@ const BookController = {
     async update(req, res) {
         const bookID = req.params.id;
         const { title, author, publisheddate, description } = req.body;
-        const image = req.file.filename;
+        const image = req.file;
 
         const update = await books.findOne({ _id: bookID });
         if (title) {
