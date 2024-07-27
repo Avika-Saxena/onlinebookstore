@@ -4,12 +4,11 @@ const path = require('path');
 const cookie_parser = require('cookie-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const bookstoremodel = require('./models/bookmodels');
+const bookmodel = require('./models/bookmodels');
 const book = require('./controllers/bookcontroller');
 const multer = require('multer');
-
-
 dotenv.config();
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -41,4 +40,4 @@ app.post(`/read/:id`, book.read);
 
 app.listen(PORT, () => {
     console.log("Server started");
-})
+});
